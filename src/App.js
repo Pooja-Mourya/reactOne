@@ -1,10 +1,10 @@
 import React from 'react'
 import Dashboard from './dashboard/Dashboard'
 
-function App() {
+function App(name) {
   return (
     <div>
-      <Dashboard />
+      <Dashboard name={name} />
     </div>
   )
 }
