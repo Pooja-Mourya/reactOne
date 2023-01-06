@@ -5,12 +5,9 @@ import Sidebar from './Sidebar'
 
 function Dashboard() {
   return (
-    <div>
-      <p name={'pooja'}></p>
-      <Nav />
-      <Sidebar />
-      <Landing />
-    </div>
+    <vid>
+      <p>hello</p>
+    </vid>
   )
 }
 
