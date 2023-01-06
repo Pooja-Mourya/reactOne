@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function Nav() {
   return (
@@ -6,9 +7,9 @@ function Nav() {
       <nav className="navbar bg-body-dark fixed-top">
         <ul class="nav justify-content-end">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">
-              Active
-            </a>
+            <Link class="nav-link active" aria-current="page" href="/">
+              Home
+            </Link>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">
