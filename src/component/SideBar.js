@@ -5,10 +5,10 @@ import {
   FaBeer,
   FaCommentAlt,
   FaHome,
-  FaRegChartBar,
   FaShoppingBag
 } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
+import Nav from "../dashboard/Nav";
 
 function SideBar({ children }) {
   const menuicons = [
@@ -40,26 +40,49 @@ function SideBar({ children }) {
   ];
   const [isOpen, setIsOpen] = useState(true);
 
-  const toggle = () => setIsOpen(!isOpen);
+  const toggle = () => {
+    // alert('preesed')
+    setIsOpen(!isOpen);
+  };
 
   return (
-    <div className="">
-      <div style={{ blackgrounColor: "red", width: isOpen ? '350' : '50' }}>
-        <div>
-          <h1>Logo</h1>
+    <>
+      <div style={{fex:1 , flexDirection:'row'}}>
+        <Nav />
+        <div
+          style={{
+            backgroundColor: "red",
+            width: isOpen ? "20%" : "5%",
+            height: "100%"
+          }}
+        >
           <div>
-            <FaBars onClick={toggle} />
+            <h1>Logo</h1>
+            <div>
+              <FaBars style={{}} onClick={toggle} />
+            </div>
           </div>
+          {menuicons.map((item, index) => (
+            <NavLink
+              style={{ textDecoration: "none" }}
+              to={item.path}
+              key={index}
+            >
+              <div>{item.icon}</div>
+              <div
+                style={{
+                  display: isOpen ? "block" : "none",
+                  color: "black"
+                }}
+              >
+                {item.name}
+              </div>
+            </NavLink>
+          ))}
         </div>
-        {menuicons.map((item, index) => (
-          <NavLink  to={item.path} key={index}>
-            <div>{item.icon}</div>
-            <div>{item.name}</div>
-          </NavLink>
-        ))}
+        <main>{children}</main>
       </div>
-      <main>{children}</main>
-    </div>
+    </>
   );
 }
 
