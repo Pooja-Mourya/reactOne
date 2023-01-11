@@ -12,6 +12,8 @@
 
 .sideContainer {
     display: flex;
+    /* flex-direction: column; */
+    /* justify-content: space-between; */
 }
 
 .sidebar {
@@ -32,6 +34,12 @@
     font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 
+.handleLogout{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 90vh;
+}
 .navItem{
     display: flex;
     flex-direction: 'row';
@@ -42,9 +50,14 @@
     
 }
 
+.userImage{
+    border-radius: 50px;
+    background-color: rebeccapurple;
+    padding: 5px 10px;
+    margin:5px
+}
 .navItem:hover{
     background-color: #282c34;
-    /* padding: 10px; */
     border-radius: 5px;
     color: white;
 }
@@ -72,6 +85,28 @@ main{
 .HomeContainer{
     
 }
+
+/* landing page css  */
+.LandingContainer{
+    display: flex;
+    height: 100vh;
+    background-color: azure;
+    position: fixed;
+}
+
+.landingTitle{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 30;
+}
+
+.cartBtnGroup{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        /* height: 90vh; */
+    }
+
+
 /* font-family: 'Nunito', sans-serif;
 font-family: 'Urbanist', sans-serif; */
 
