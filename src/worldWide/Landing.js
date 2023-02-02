@@ -2,11 +2,12 @@ import React from 'react'
 import Navbar from '../component/Navbar'
 import WideNav from '../component/WideNav'
 import myImg from '../assets/image/rmmlogo.jpg'
+import ReactHookForm from '../reacthookform/ReactHookForm'
 
 function Landing() {
   return (
     <>
-      <div className="card mb-2"></div>
+      {/* <div className="card mb-2"></div>
       <div className="LandingContainer">
         <div className=" row ">
           <div className="col-sm-6 mb-3 mb-sm-0 ">
@@ -31,7 +32,8 @@ function Landing() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
+      <ReactHookForm />
     </>
   )
 }

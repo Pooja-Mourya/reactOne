@@ -2,6 +2,7 @@
   "name": "commen",
   "version": "0.1.0",
   "private": true,
+  "proxy":"http://localhost:3002",
   "dependencies": {
     "@coreui/icons": "^2.1.0",
     "@coreui/icons-react": "^2.1.0",
