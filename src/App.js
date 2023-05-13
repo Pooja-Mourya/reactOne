@@ -1,10 +1,8 @@
 import React from 'react'
-import Login from './screen/Login'
+import Topbar from './screen/topbar/topbar'
 
 function App() {
-  return (
-   <Login/>
-  )
+  return <Topbar />
 }
 
 export default App
