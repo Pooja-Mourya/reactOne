@@ -6,26 +6,31 @@ export default function Navbar() {
   return (
     <>
       <ul className="nav justify-content-center">
-        <Link to={'../home/Home'} className="nav-item">
-          <a className="nav-link active" aria-current="page" href="#" id="home">
+        <li to={'../home/Home'} className="nav-item">
+          <a
+            className="nav-link active"
+            aria-current="page"
+            href="#home"
+            id="home"
+          >
             Home
           </a>
-        </Link>
-        <Link to={'../about/About'} className="nav-item">
-          <a className="nav-link" href="#" id="about">
+        </li>
+        <li to={'../about/About'} className="nav-item">
+          <a className="nav-link" href="#about" id="about">
             About
           </a>
-        </Link>
-        <Link to={'../contact/Contact'} className="nav-item">
-          <a className="nav-link" href="#" id="contact">
+        </li>
+        <li to={'../contact/Contact'} className="nav-item">
+          <a className="nav-link" href="#contact" id="contact">
             Contact
           </a>
-        </Link>
-        <Link to={'../auth/Auth'} className="nav-item">
-          <a className="nav-link " id="signup">
+        </li>
+        <li to={'../auth/Auth'} className="nav-item">
+          <a className="nav-link " id="#signup">
             SignUp/SignIn
           </a>
-        </Link>
+        </li>
       </ul>
     </>
   )
