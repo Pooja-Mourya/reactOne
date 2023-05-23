@@ -4,12 +4,10 @@ import './Topbar.css'
 import slide1 from '../assets/img/slide1.jpg'
 import slide2 from '../assets/img/slide2.jpg'
 import slide3 from '../assets/img/slide3.jpg'
-import Navbar from './Navbar'
 
 function Topbar() {
   return (
     <>
-      <Navbar />
       <div
         id="carouselExampleAutoplaying"
         className="carousel slide"
@@ -20,7 +18,7 @@ function Topbar() {
             <img
               src={slide1}
               className="d-block w-100"
-              style={{ width: '100%', height: 400 }}
+              style={{ width: '100%', height: 300 }}
               alt="..."
             />
           </div>
@@ -28,7 +26,7 @@ function Topbar() {
             <img
               src={slide2}
               className="d-block w-100"
-              style={{ width: '100%', height: 400 }}
+              style={{ width: '100%', height: 300 }}
               alt="..."
             />
           </div>
@@ -36,7 +34,7 @@ function Topbar() {
             <img
               src={slide3}
               className="d-block w-100"
-              style={{ width: '100%', height: 400 }}
+              style={{ width: '100%', height: 300 }}
               alt="..."
             />
           </div>
@@ -66,7 +64,6 @@ function Topbar() {
           <span className="visually-hidden">Next</span>
         </button>
       </div>
-      <p style={{ textAlign: 'center', margin: 20, fontSize: 35 }}>home</p>
     </>
   )
 }
