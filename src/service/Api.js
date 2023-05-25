@@ -5,8 +5,14 @@ const postsUrl = 'http://localhost:8080'
 export const addPost = async (post) => {
   return await axios.post(`${postsUrl}/createPost`, post)
 }
-export const userRegistration = async (post) => {
+export const deletePost = async (post) => {
+  await axios.delete(`${postsUrl}/deletePost`, post)
+}
+export const newUser = async (post) => {
   return await axios.post(`${postsUrl}/userRegistration`, post)
+}
+export const newLogin = async (post) => {
+  await axios.post(`${postsUrl}/userLogin${post}`)
 }
 
 export const postMethod = async (endPoint, body, token) => {

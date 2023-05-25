@@ -35,53 +35,61 @@ export async function addPost(req, res) {
 export async function fetchPost(req, res) {
   try {
     const posts = await CreatePost.find()
-    res.send(posts)
+    res.send({ success: true, message: 'all post are here', posts: posts })
   } catch (error) {
     console.log(error)
+    res.status(500).send({ success: false, message: 'server error', error })
   }
 }
 
 export async function viewPostById(req, res) {
+  const _id = req?.params?.id
+  console.log('_id', _id)
   try {
-    const _id = req.params.id
-    // console.log('_id', _id)
     const viewPost = await CreatePost.findById(_id)
-    if (!viewPost) {
-      return res.status(500).send({ message: 'post not found' })
-    } else {
-      res.send(viewPost, { message: 'fetch post by id' })
-    }
+    res.send(viewPost)
   } catch (error) {
     console.log(error)
+    res.send({ message: 'server error' })
   }
 }
 
 export async function updatePosts(req, res) {
   try {
     const _id = req.params.id
-    const updatePost = await CreatePost.findByIdAndUpdate(_id, req.body)
-    if (!updatePost) {
-      return res
-        .status(404)
-        .send(updatePost, { message: 'something went wrong' })
-    } else {
-      res.send({ message: 'post updated successful' })
-    }
+    console.log('_id', _id)
+    const { title, description, image } = req.body
+    console.log('req.body', req.body)
+
+    const updatePost = await CreatePost.findByIdAndUpdate(
+      _id,
+      { ...req.body },
+      { new: true },
+    )
+    res.status(200).send({
+      success: true,
+      message: 'updated successful',
+      post: updatePost,
+    })
   } catch (error) {
-    console.log(error)
+    console.log('error', error)
+    res.status(500).send({ success: false, message: 'server error', error })
   }
 }
 
 export async function deletePost(req, res) {
   try {
-    const delPost = await CreatePost.findOneAndDelete()
-    // console.log('delPost', delPost)
-    if (!delPost) {
-      return res.status(500).send()
-    } else {
-      res.send(delPost)
-    }
+    const { _id } = req.params.id
+    const delPost = await CreatePost.findOneAndDelete(_id)
+    return res
+      .status(200)
+      .send({ success: true, message: 'deleted post', delPost: delPost })
   } catch (error) {
     console.log(error)
+    return res.status(500).send({
+      success: false,
+      message: 'already delete post',
+      error,
+    })
   }
 }

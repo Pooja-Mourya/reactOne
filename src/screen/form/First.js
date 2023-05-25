@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { addPost } from '../../service/Api'
-import { useNavigation } from 'react-router-dom'
+// import { useNavigation } from 'react-router-dom'
 
 const defaultValue = {
   title: '',
@@ -25,12 +25,12 @@ function First() {
     await addPost(formData)
   }
 
-  const navigation = useNavigation()
+  //   const navigation = useNavigation()
   const handleImage = (e) => {
     setPost({ ...post, image: e.target.files[0] })
-    navigation.push('../home/Home')
+    // navigation.push('../home/Home')
   }
-  console.log('formData', formData)
+  //   console.log('formData', formData)
   return (
     <div className="container">
       <div className="row justify-content-center">
@@ -59,14 +59,6 @@ function First() {
                     />
                   </div>
                 </div>
-                {/* <div className="col-md-2">
-                  <button
-                    className="btn btn-primary"
-                    // onClick={{}}
-                  >
-                    Upload
-                  </button>
-                </div> */}
                 <div className="col-md-12">
                   <div className="form-group">
                     <label className="label">Title</label>

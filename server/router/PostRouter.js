@@ -11,7 +11,8 @@ import upload from '../middleWare/upload.js'
 
 router.post('/createPost', upload.single('image'), addPost)
 router.get('/fetchPost', fetchPost)
-router.get('/viewPost:id', viewPostById)
+
+router.get('/viewPost/:id', viewPostById)
 router.delete('/deletePost/:id', deletePost)
-router.patch('/updatePost/:id', updatePosts)
+router.put('/updatePost/:id', updatePosts)
 export default router

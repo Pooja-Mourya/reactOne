@@ -1,44 +1,50 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { newLogin } from '../../service/Api'
 
 function Login() {
+  const [user, setUser] = useState({
+    email: '',
+    password: '',
+  })
+
+  const handleOnChange = (e) => {
+    setUser((event) => ({ ...event, [e.target.name]: e.target.value }))
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    newLogin({
+      email: user.email,
+      password: user.password,
+    })
+    console.log('submit')
+  }
   return (
     <div>
-      <form>
+      <form action="post" onSubmit={(e) => handleSubmit(e)}>
         <div className="col-9">
-          <label for="exampleInputEmail1" className="form-label">
-            Email address
-          </label>
+          <label className="form-label">Email address</label>
           <input
             type="email"
             className="form-control"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
+            name="email"
+            placeholder="Email"
+            value={user.email}
+            onChange={handleOnChange}
           />
-          <div id="emailHelp" className="form-text">
-            We'll never share your email with anyone else.
-          </div>
         </div>
         <div className="col-9 ">
-          <label for="exampleInputPassword1" className="form-label">
-            Password
-          </label>
+          <label className="form-label">Password</label>
           <input
             type="password"
             className="form-control"
-            id="exampleInputPassword1"
+            name="password"
+            placeholder="Password"
+            value={user.password}
+            onChange={handleOnChange}
           />
         </div>
-        <div className="mb-3 form-check">
-          <input
-            type="checkbox"
-            className="form-check-input"
-            id="exampleCheck1"
-          />
-          <label className="form-check-label" for="exampleCheck1">
-            Check me out
-          </label>
-        </div>
-        <button type="submit" className="btn btn-primary mb-5">
+        <button type="submit" className="btn btn-primary mb-5 mt-5">
           Login
         </button>
       </form>

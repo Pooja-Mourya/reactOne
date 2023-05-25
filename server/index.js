@@ -7,6 +7,8 @@ import dotenv from 'dotenv'
 
 import UserRouter from './router/UserRouter.js'
 import PostRouter from './router/PostRouter.js'
+// import isBlog from '../server/middleWare/blogMiddleware/isBlog.js'
+// import adminRouter from './router/blogRouter/adminRouter.js'
 
 dotenv.config()
 const app = express()
@@ -18,6 +20,9 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())
 app.use(express.urlencoded({ extended: false }))
 app.use('/upload', express.static('upload'))
+
+app.set('view engine', 'ejs')
+app.set('view', './view')
 
 mongoose.set('strictQuery', false)
 mongoose.connect(process.env.MONGO_DB)

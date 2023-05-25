@@ -6,6 +6,7 @@ import {
   userChangePassword,
   userLogout,
   userResetPassword,
+  getAllUsers,
   //   userResetPasswordByEmail,
 } from '../controller/userController.js'
 import { verifyPassword } from '../middleware/verifyPassword.js'
@@ -15,6 +16,7 @@ router.use('/userChangePassword', verifyPassword)
 router.use('/userLogout', verifyPassword)
 
 router.post('/userRegistration', userRegistration)
+router.get('/getAllUsers', getAllUsers)
 router.post('/userLogin', userLogin)
 router.post('/userChangePassword', userChangePassword)
 router.get('/userLogout', userLogout)

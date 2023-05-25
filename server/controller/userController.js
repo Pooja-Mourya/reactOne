@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken'
 
 export async function userRegistration(req, res) {
   try {
-    const { firstName, lastName, email, password, tc } = req.body
+    const { userName, email, password } = req.body
     const user = await UserModal.findOne({ email })
     if (user) {
       return res.status(409).send({ message: 'user already exist' })
@@ -12,11 +12,9 @@ export async function userRegistration(req, res) {
 
     const hashPassword = await bcrypt.hashSync(password, 12)
     const result = await UserModal.create({
-      firstName: firstName,
-      lastName: lastName,
+      userName: userName,
       email: email,
       password: hashPassword,
-      tc: tc,
     })
 
     const token = await jwt.sign(
@@ -34,6 +32,26 @@ export async function userRegistration(req, res) {
   }
 }
 
+export async function getAllUsers(req, res) {
+  try {
+    const allUser = await UserModal.find({})
+    if (allUser) {
+      return res.status(200).send({
+        userCount: UserModal.length,
+        success: true,
+        message: 'all user get successfully',
+        allUser,
+      })
+    }
+  } catch (error) {
+    console.log(error)
+    return res.status(500).send({
+      success: false,
+      message: 'all user server error',
+      error,
+    })
+  }
+}
 export async function userLogin(req, res) {
   try {
     const { email, password } = req.body
@@ -41,18 +59,36 @@ export async function userLogin(req, res) {
     if (!user) {
       return res.status(400).json({ error: 'Invalid credentials' })
     }
-    if (password !== user.password) {
-      return res.status(400).json({ error: 'Invalid credentials' })
+    // if (password != user.password) {
+    //   return res.status(400).json({ error: 'Invalid credentials p' })
+    // }
+    const isMatch = await bcrypt.compare(password, user.password)
+    if (!isMatch) {
+      res.status(439).send({
+        success: false,
+        message: 'invalid credential',
+      })
     }
-    const token = jwt.sign({ email }, 'process.env.PRIVATE_KEY', {
-      expiresIn: '8h',
+    // const token = jwt.sign({ email }, process.env.PRIVATE_KEY, {
+    //   expiresIn: '8h',
+    // })
+
+    return res.status(200).send({
+      success: true,
+      message: 'user login',
+      user,
     })
-    return res
-      .status(201)
-      .json({ message: 'user login successfully', user: user, token: token })
+
+    // return res
+    //   .status(201)
+    //   .json({ message: 'user login successfully', user: user, token: token })
   } catch (error) {
     console.error(error)
-    return res.status(500).json({ error: 'Server error' })
+    return res.status(500).send({
+      success: false,
+      message: 'login error',
+      error,
+    })
   }
 }
 
