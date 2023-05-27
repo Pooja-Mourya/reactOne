@@ -1,41 +1,51 @@
-import React, { useState } from 'react'
-import { addPost } from '../../service/Api'
+import React, { useEffect, useState } from 'react'
+import { addPost, updatePost } from '../../service/Api'
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
-const defaultValue = {
-  title: '',
-  description: '',
-  image: '',
-  user: '',
-}
-function First() {
-  const [post, setPost] = useState(defaultValue)
+function UpdateBlog() {
+  const navigation = useNavigate()
+  const [post, setPost] = useState({})
 
   const handleOnChange = (e) => {
     setPost({ ...post, [e.target.name]: e.target.value })
   }
-
-  const formData = new FormData()
-  const userId = localStorage.getItem('@user')
-  console.log('userId', userId)
+  const id = localStorage.getItem('@user')
 
   const handleSubmit = async (e) => {
+    e.preventDefault()
+    const formData = new FormData()
+
     formData.append('title', post.title)
     formData.append('description', post.description)
     formData.append('image', post.image)
-    formData.append('user', userId)
-
-    e.preventDefault()
-    await addPost(formData)
+    await updatePost(formData)
+    navigation('/prime-posts')
   }
   const handleImage = (e) => {
     setPost({ ...post, image: e.target.files[0] })
   }
+
+  const postById = async () => {
+    const getBlog = await axios.get(`/viewPost/${id}`)
+    console.log('getBlog', getBlog)
+    setPost({
+      title: getBlog.title,
+      description: getBlog.description,
+      image: getBlog.image,
+    })
+  }
+
+  useEffect(() => {
+    postById()
+  }, [id])
+
   //   console.log('formData', formData)
   return (
     <div className="container">
       <div className="row justify-content-center">
         <div className="col-md-6 text-center mb-5">
-          <h2 className="heading-section m-5">Create Blog Post</h2>
+          <h2 className="heading-section m-5">Update Blog Post</h2>
         </div>
       </div>
       <div className="row justify-content-center">
@@ -90,7 +100,7 @@ function First() {
                     <button
                       type="submit"
                       value="submit"
-                      className="btn btn-primary"
+                      className="btn btn-warning"
                     >
                       Submit
                     </button>
@@ -105,4 +115,4 @@ function First() {
   )
 }
 
-export default First
+export default UpdateBlog

@@ -5,11 +5,11 @@ const CreatePostSchema = new mongoose.Schema(
     title: { type: String },
     description: { type: String },
     image: { type: String }, //default: 'default.png'
-    // user: {
-    //   type: mongoose.Types.ObjectId,
-    //   ref: 'user',
-    //   require: [true, 'user required'],
-    // },
+    user: {
+      type: mongoose.Types.ObjectId,
+      ref: 'user',
+      require: [true, 'user required'],
+    },
   },
   { timestamps: true },
 )

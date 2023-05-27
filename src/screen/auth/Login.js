@@ -1,7 +1,12 @@
-import React, { useState } from 'react'
-import { newLogin } from '../../service/Api'
+import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { userLogin } from '../../redux/userSlice'
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 function Login() {
+  const dispatch = useDispatch()
+  const navigation = useNavigate()
   const [user, setUser] = useState({
     email: '',
     password: '',
@@ -11,14 +16,19 @@ function Login() {
     setUser((event) => ({ ...event, [e.target.name]: e.target.value }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    newLogin({
+    const login = {
       email: user.email,
       password: user.password,
-    })
-    console.log('submit')
+    }
+    const result = await axios.post('/userLogin', login)
+    alert('user login successfully')
+    localStorage.setItem('@user', result?.data?.user?._id)
+    dispatch(userLogin())
+    navigation('prime-posts')
   }
+
   return (
     <div>
       <form action="post" onSubmit={(e) => handleSubmit(e)}>

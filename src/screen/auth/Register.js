@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
 import { newUser } from '../../service/Api'
+import { useNavigate } from 'react-router-dom'
+import Home from '../home/Home'
 
 function Register() {
+  const navigation = useNavigate()
   const [formData, setFormData] = useState({
     userName: '',
     email: '',
@@ -21,6 +24,8 @@ function Register() {
     }
     // console.log('data', data)
     await newUser(data)
+    alert('user register successfully')
+    return <Home />
   }
   return (
     <div>
@@ -28,52 +33,44 @@ function Register() {
       <form
         // action="/uploads"
         method="post"
-        onSubmit={(e) => registration(e)}
+        onSubmit={registration}
       >
-        <div className="row p-5">
-          <div className="col-md-9">
-            <div className="form-group">
-              <label className="label">User Name</label>
-              <input
-                type="text"
-                className="form-control"
-                name="userName"
-                placeholder="User Name"
-                value={formData.userName}
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-          <div className="col-md-9">
-            <div className="form-group">
-              <label className="label">Email Address</label>
-              <input
-                type="email"
-                className="form-control"
-                name="email"
-                placeholder="Email Address"
-                value={formData.email}
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-          <div className="col-md-9">
-            <div className="form-group">
-              <label className="label">Password</label>
-              <input
-                type="password"
-                className="form-control"
-                name="password"
-                placeholder="Password"
-                value={formData.password}
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-          <button className="btn btn-info mt-5" type="submit" value="submit">
-            Register
-          </button>
+        <div className="col-12">
+          <label className="form-label">User Name</label>
+          <input
+            type="text"
+            className="form-control"
+            name="userName"
+            placeholder="User Name"
+            value={formData.userName}
+            onChange={handleChange}
+          />
         </div>
+        <div className="col-12">
+          <label className="form-label">Email Address</label>
+          <input
+            type="email"
+            className="form-control"
+            name="email"
+            placeholder="Email Address"
+            value={formData.email}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="col-12">
+          <label className="from-label">Password</label>
+          <input
+            type="password"
+            className="form-control"
+            name="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={handleChange}
+          />
+        </div>
+        <button className="btn btn-info mt-5" type="submit" value="submit">
+          Register
+        </button>
       </form>
     </div>
   )

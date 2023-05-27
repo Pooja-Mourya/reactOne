@@ -23,7 +23,7 @@ function Auth() {
             <div className="wrapper">
               <div className="row no-gutters mb-5">
                 <div
-                  className="col-md-5 d-flex align-items-stretch card"
+                  className="col-md-5 d-flex align-items-stretch card mt-5"
                   style={{ paddingLeft: 20 }}
                 >
                   <h4 className="heading-section text-center m-5">
@@ -32,9 +32,11 @@ function Auth() {
                   <Login />
                 </div>
 
-                <div className="col-md-7 ">
-                  <div className="contact-wrap w-100 p-md-5 p-4">
-                    <h4 className="mb-4">User registration form!</h4>
+                <div className="col-md-7 mt-5">
+                  <div className="contact-wrap w-100 p-md-3 p-4 card">
+                    <h4 className="heading-section text-center m-5">
+                      User registration form!
+                    </h4>
                     <Register />
                   </div>
                 </div>

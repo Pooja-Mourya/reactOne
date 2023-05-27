@@ -2,17 +2,19 @@ import axios from 'axios'
 
 const postsUrl = 'http://localhost:8080'
 
+const id = localStorage.getItem('@user')
+
 export const addPost = async (post) => {
   return await axios.post(`${postsUrl}/createPost`, post)
+}
+export const updatePost = async (post) => {
+  return await axios.put(`${postsUrl}/updatePost/${id}`, post)
 }
 export const deletePost = async (post) => {
   await axios.delete(`${postsUrl}/deletePost`, post)
 }
 export const newUser = async (post) => {
   return await axios.post(`${postsUrl}/userRegistration`, post)
-}
-export const newLogin = async (post) => {
-  await axios.post(`${postsUrl}/userLogin${post}`)
 }
 
 export const postMethod = async (endPoint, body, token) => {

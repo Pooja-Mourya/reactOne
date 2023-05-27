@@ -4,6 +4,7 @@ import {
   addPost,
   deletePost,
   fetchPost,
+  getUserBlog,
   updatePosts,
   viewPostById,
 } from '../controller/postController.js'
@@ -15,4 +16,5 @@ router.get('/fetchPost', fetchPost)
 router.get('/viewPost/:id', viewPostById)
 router.delete('/deletePost/:id', deletePost)
 router.put('/updatePost/:id', updatePosts)
+router.get('/userBlog/:id', getUserBlog)
 export default router

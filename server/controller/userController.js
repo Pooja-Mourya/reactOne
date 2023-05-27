@@ -17,14 +17,14 @@ export async function userRegistration(req, res) {
       password: hashPassword,
     })
 
-    const token = await jwt.sign(
-      { userId: result._id, email: result.email },
-      'process.env.PRIVATE_KEY',
-    )
+    // const token = await jwt.sign(
+    //   { userId: result._id, email: result.email },
+    //   'process.env.PRIVATE_KEY',
+    // )
     res.status(201).json({
       message: 'user added successfully ',
       user: result,
-      token: token,
+      //   token: token,
     })
   } catch (error) {
     console.log('error', error)
