@@ -11,10 +11,11 @@ import {
   resetPassword,
 } from '../controller/userController.js'
 import protect from '../middleware/authMiddleware.js'
+import uploadMiddleware from '../middleware/uploadMiddleware.js'
 
 const router = express.Router()
 
-router.post('/register', registerUser)
+router.post('/register', uploadMiddleware.single('photo'), registerUser)
 router.post('/login', loginUser)
 router.get('/logout', logout)
 router.get('/getuser', getUser)
@@ -34,4 +35,6 @@ export default router
 // rtc half duplex , full duplex
 
 //The password you entered is insecure. Your new password must contain at least 8 characters, cannot contain any part of your email address, and is different from your previous 4 passwords.
-// Pooja***123456
+
+//mongoDp password
+// Sun***123

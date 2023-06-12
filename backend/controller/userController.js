@@ -8,58 +8,63 @@ const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '1d' })
 }
 export const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, password } = req.body
-
-  // Validation
-  if (!name || !email || !password) {
-    res.status(400).send('Please fill in all required fields')
-  }
-  if (password.length < 6) {
-    res.status(400).send('Password must be up to 6 characters')
-    console.log('password error')
-  }
-
-  // Check if user email already exists
-  const userExists = await User.findOne({ email })
-
-  if (userExists) {
-    res.status(400).send('Email has already been registered')
-    console.log('user existing error')
-  }
-
-  // Create new user
-  const user = await User.create({
-    name,
-    email,
-    password,
-  })
-
-  // Generate Token
-  const token = generateToken(user._id)
-
-  // Send HTTP-only cookie
-  res.cookie('token', token, {
-    path: '/',
-    httpOnly: true,
-    expires: new Date(Date.now() + 1000 * 86400), // 1 day
-    sameSite: 'none',
-    secure: true,
-  })
-
-  if (user) {
-    const { _id, name, email, photo, phone, bio } = user
-    res.status(201).json({
-      _id,
-      name,
-      email,
-      photo,
-      phone,
-      bio,
-      token,
+  try {
+    const { name, email, password } = req.body
+    const addUser = new User({
+      name: req.body.name,
+      email: req.body.email,
+      password: req.body.password,
+      photo: req.body.photo,
+      phone: req.body.phone,
+      bio: req.body.boi,
     })
-  } else {
-    console.log('invalid user data')
-    res.status(400).send('Invalid user data')
+
+    if (!name || !email || !password) {
+      res.status(400).send('Please fill in all required fields')
+    }
+    if (password.length < 6) {
+      res.status(400).send('Password must be up to 6 characters')
+      console.log('password error')
+    }
+
+    const userExists = await User.findOne({ email })
+
+    if (userExists) {
+      res.status(400).send('Email has already been registered')
+      console.log('user existing error')
+    }
+
+    await addUser.save()
+
+    if (req.file) {
+      addUser.photo = req.file.path
+    }
+
+    // res.cookie('token', token, {
+    //   path: '/',
+    //   httpOnly: true,
+    //   expires: new Date(Date.now() + 1000 * 86400), // 1 day
+    //   sameSite: 'none',
+    //   secure: true,
+    // })
+
+    const created = await addUser.save()
+
+    const token = generateToken(addUser._id)
+
+    if (created) {
+      return res.status(201).send({
+        success: true,
+        message: 'post created successfully',
+        post: created,
+        token,
+      })
+    }
+  } catch (error) {
+    console.log('save post error', error)
+    return res
+      .status(409)
+      .send({ success: false, message: 'something went wrong', error })
   }
 })
 

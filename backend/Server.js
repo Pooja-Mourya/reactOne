@@ -5,6 +5,7 @@ import bodyParser from 'body-parser'
 import mongoose from 'mongoose'
 // import errorMiddleware from './middleware/errorMiddleware.js'
 import userRoute from './routes/userRoute.js'
+import meetingRoute from './routes/meetingRoute.js'
 
 dotenv.config()
 const app = express()
@@ -16,9 +17,11 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 app.use(bodyParser.json({ extended: true }))
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use('/upload', express.static('upload'))
 
 // Routes Middleware
 app.use('/api/users', userRoute)
+app.use('/api/meeting', meetingRoute)
 // Error Middleware
 // app.use(errorMiddleware())
 

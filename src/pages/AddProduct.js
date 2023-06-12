@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import axios from 'axios'
+// import axios from 'axios'
 
 function AddProduct() {
   const [file, setFile] = useState()
@@ -25,15 +25,15 @@ function AddProduct() {
 
     var formData = new FormData()
 
-    formData.append('image', file)
-    formData.append('user', user)
+    // formData.append('image', file)
+    // formData.append('user', user)
 
-    const config = {
-      headers: {
-        'content-type': 'multipart/form-data',
-      },
-    }
-    axios.post('/upload', formData, config)
+    // const config = {
+    //   headers: {
+    //     'content-type': 'multipart/form-data',
+    //   },
+    // }
+    // axios.post('/upload', formData, config)
   }
   return (
     <div>

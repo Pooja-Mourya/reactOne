@@ -1,9 +1,6 @@
 import React, { useState } from 'react'
 import { json, Link, useNavigate } from 'react-router-dom'
-import ApiMethods from '../apiService/ApiMethods'
-import Constants from '../apiService/Constants'
-import axios from 'axios'
-import SideBar from '../component/SideBar'
+// import axios from 'axios'
 
 function Login() {
   const [email, setEmail] = useState('')
@@ -15,23 +12,23 @@ function Login() {
   const loginHandle = async (e) => {
     e.preventDefault()
     setLoading(true)
-    try {
-      const response = await axios.post(
-        'http://192.168.1.27:8000/api/user-login',
-        {
-          email: email,
-          password: password,
-        },
-      )
-      console.log(response)
-      setEmail('')
-      setPassword('')
-      setLoading(false)
-      navigate('/sidebar')
-      //   return <SideBar />
-    } catch (error) {
-      console.error(error)
-    }
+    // try {
+    //   const response = await axios.post(
+    //     'http://192.168.1.27:8000/api/user-login',
+    //     {
+    //       email: email,
+    //       password: password,
+    //     },
+    //   )
+    //   console.log(response)
+    //   setEmail('')
+    //   setPassword('')
+    //   setLoading(false)
+    //   navigate('/sidebar')
+    //   //   return <SideBar />
+    // } catch (error) {
+    //   console.error(error)
+    // }
   }
   if (loading) return <p>Loading...</p>
   return (
