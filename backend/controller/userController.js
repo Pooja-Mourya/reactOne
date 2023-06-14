@@ -53,7 +53,7 @@ export const registerUser = asyncHandler(async (req, res) => {
     const token = generateToken(addUser._id)
 
     if (created) {
-      return res.status(201).send({
+      return res.status(201).json({
         success: true,
         message: 'post created successfully',
         post: created,
@@ -132,20 +132,26 @@ export const logout = asyncHandler(async (req, res) => {
 
 // Get User Data
 export const getUser = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.user)
-  if (user) {
-    const { _id, name, email, photo, phone, bio } = user
-    res.status(200).json({
-      _id,
-      name,
-      email,
-      photo,
-      phone,
-      bio,
-    })
-  } else {
-    res.status(400)
-    throw new Error('User Not Found')
+  //   const user = await User.findById(req.user)
+  //   if (user) {
+  //     const { _id, name, email, photo, phone, bio } = user
+  //     res.status(200).json({
+  //       _id,
+  //       name,
+  //       email,
+  //       photo,
+  //       phone,
+  //       bio,
+  //     })
+  //   } else {
+  //     res.status(400)
+  //     throw new Error('User Not Found')
+  //   }
+  try {
+    const allUser = await User.find()
+    res.status(200).json(allUser)
+  } catch (error) {
+    res.status(500).send({ success: false, message: 'user not found' })
   }
 })
 
