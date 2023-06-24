@@ -9,10 +9,7 @@ body {
   font-family: "Roboto Condensed", sans-serif;
 }
  /* navbar style */
-.logo {
-  width: 16.25rem;
-  background-color: rosybrown;
-}
+
 
 nav a.nav-link {
   cursor: pointer;

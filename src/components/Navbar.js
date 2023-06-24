@@ -1,66 +1,84 @@
-import React from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faBars } from '@fortawesome/free-solid-svg-icons'
+import React, { useState } from "react";
+import "./Navbar.css";
+import {
+  FaFacebookSquare,
+  FaInstagramSquare,
+  FaYoutubeSquare
+} from "react-icons/fa";
+import { GiHamburgerMenu } from "react-icons/gi";
 
-function Navbar() {
+const Navbar = () => {
+  const [showMediaIcons, setShowMediaIcons] = useState(false);
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div className="container">
-        <a className="navbar-brand logo" href="#">
-          Navbar
-        </a>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <FontAwesomeIcon icon={faBars} style={{color:"white"}} />
-        </button>
+    <>
+      <nav className="main-nav">
+        {/* 1st logo part  */}
+        <div className="logo">
+          <h2>
+            <span>P</span>ooja
+            <span>M</span>ourya
+          </h2>
+        </div>
 
+        {/* 2nd menu part  */}
         <div
-          className="collapse navbar-collapse f-1"
-          id="navbarSupportedContent"
+          className={
+            showMediaIcons ? "menu-link mobile-menu-link" : "menu-link"
+          }
         >
-          <ul className="navbar-nav justify-content-end">
-            <li className="nav-item">
-              <a className="nav-link active" href="#">
-                home
+            <ul>
+              <li>
+                <a href="#">Home</a>
+              </li>
+              <li>
+                <a href="#about">about</a>
+              </li>
+              <li>
+                <a href="#service">services</a>
+              </li>
+              <li>
+                <a href="#contact">contact</a>
+              </li>
+            </ul>
+            
+        </div>
+
+        {/* 3rd social media links */}
+        <div className="social-media">
+          <ul>
+            <li>
+              <a href="#" target="_thapa">
+                <FaFacebookSquare className="facebook" />
               </a>
             </li>
-            <li className="nav-item">
-              <a className="nav-link active" href="#">
-                about me
+            <li>
+              <a href="#" target="_thapa">
+                <FaInstagramSquare className="instagram" />
               </a>
             </li>
-            <li className="nav-item">
-              <a className="nav-link active" href="#">
-                services
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link active" href="#">
-                how work
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link active" href="#">
-                portfolio
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link active" href="#">
-                contact
+            <li>
+              <a href="#" target="_thapa">
+                <FaYoutubeSquare className="youtube" />
               </a>
             </li>
           </ul>
+
+          {/* hamburget menu start  */}
+          <div className="hamburger-menu">
+            <a onClick={() => setShowMediaIcons(!showMediaIcons)}>
+              <GiHamburgerMenu />
+            </a>
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+
+      {/* hero section  */}
+      {/* <section className="hero-section">
+        <p>Welcome to </p>
+        <h1>Thapa Technical</h1>
+      </section> */}
+    </>
   );
-}
+};
 
 export default Navbar;
